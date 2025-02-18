@@ -4,7 +4,6 @@ import React, { useEffect } from 'react'
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 
-const URL = process.env.NEXT_PUBLIC_BETTER_AUTH_URL
 
 const Page = () => {
   const router = useRouter();
@@ -13,7 +12,7 @@ const Page = () => {
     
     useEffect(() => {
     if (!isPending && session) {
-      router.push("/");
+      router.push("/dashboard");
     }
   }, [session, isPending, router]);
 
@@ -25,7 +24,7 @@ const Page = () => {
               toast.promise(
                   async () => { 
                   await authClient.signIn.social({
-                      provider: "github",
+                    provider: "github",
                 })}
                 , {
                     loading: "Authenticating...",
@@ -35,7 +34,6 @@ const Page = () => {
           }}>
               Sign In With Github 
           </button>
-          <pre>{JSON.stringify(session, null, 2)}</pre>
     </div>
   ) 
 }
